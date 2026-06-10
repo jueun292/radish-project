@@ -71,7 +71,7 @@ AI-Hub 스타일 무(radish) 작물 이미지에서 **정상(normal) vs 질병(d
 
 ## 환경 설정
 
-**요구사항**: Linux, NVIDIA GPU(CUDA), Python 3.10. 학습은 RTX PRO 6000 Blackwell(sm_120) + CUDA 12.8에서 검증됨. 패키지는 [`uv`](https://docs.astral.sh/uv/)로 격리한다.
+**요구사항**: Linux, NVIDIA GPU(CUDA), Python 3.10. 패키지는 [`uv`](https://docs.astral.sh/uv/)로 격리한다.
 
 ```bash
 # 1) uv 설치 (https://docs.astral.sh/uv/ 참고) 후 가상환경 생성
@@ -133,21 +133,6 @@ cd ..
 
 ---
 
-## 빠른 시작: 노트북 (가장 쉬움, self-contained)
-
-**`radish_demo.ipynb`** 한 파일이 **환경 설치(`%pip`) → 데이터 압축해제·정리·분석(EDA) → 학습 → 평가 → 데모**를 모두 수행한다(무거운 작업은 내부에서 `sys.executable` 서브프로세스로). 별도의 `.venv`가 없어도 되고, **데이터 경로(`DATA_DIR`)만 지정하면 zip을 직접 풀고 by_disease·manifest까지 정리**한다.
-
-```bash
-# (jupyter가 없으면) 커널만 준비
-uv pip install --python .venv/bin/python jupyterlab ipykernel
-./.venv/bin/python -m ipykernel install --user --name python3 --display-name "Python 3 (.venv)"
-./.venv/bin/jupyter lab    # radish_demo.ipynb 열고 위에서부터 실행
-```
-
-- §0가 의존성을 현재 커널에 설치, §1이 `DATA_DIR`의 zip을 압축 해제·정리·EDA, §2에 **전체 42개 spec이 그룹별로 나열**(불필요한 줄 `#` 주석처리), §3~6이 평가·그림·데모.
-- 모든 단계 idempotent(이미 된 건 건너뜀). 새 데이터셋이면 §1의 `REBUILD_MANIFEST=True`.
-
-아래는 노트북 없이 CLI로 단계별 실행하는 방법이다.
 
 ## 재현: 학습
 
